@@ -29,7 +29,7 @@ https://github.com/ymkjp/js_design_patterns/blob/master/app.js
 なぜなら「js プラグインのお作法」として次のような共通点があるからです。
 
 * グローバル変数を汚染しない
-* window や document をローカル変数として扱うことで
+* window や document をローカル変数として扱う
  * 参照を高速化できる
  * 効率よくミニファイできる
 * 複数のインスタンスが生成されることを防止するような機構を導入する
