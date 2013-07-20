@@ -9,6 +9,8 @@
  * もしくは「ここまで学んできた内容は jQuery ではどうなってんだよ」みたいなもんです。
  *
  */
+/*jslint browser: true, regexp: true */
+/*global jQuery, $ */
 
 /**
  * 5-1. 「コンポジットパターン」
@@ -86,7 +88,7 @@ var currentOpacity = $('.container').css('opacity');
  * 特定のシステムと互換性のあるインターフェイスに変換してくれる方法を
  * 「アダプタパターン」といいます。
  *
- * ※で、本に載っているコード例を github の jQuery リポジトリから探しても
+ * で、本に載っているコード例は github の jQuery リポジトリから探しても
  * 見つからなかったので割愛します。
  *
  */
@@ -166,13 +168,124 @@ $.ajax({
 /**
  * 5-4. オブザーバパターン
  *
+ * （マジで書くのだるくなってきたｗ）
+ *
+ * 例によってコードから見てみましょう。
+ *
+ */
+
+// subscribe(topicName, callback) に相当
+$(document).on('topicName', function () {
+    // 何らかの動作を行う
+});
+
+// publish(topicName) に相当
+$(document).trigger('topicName');
+
+// unscribe(topicName) に相当
+$(document).off('topicName');
+
+
+/**
+ * はい、これもよく使いますね。
+ * まんまオブザーバです。
+ *
+ * これを実現している jQuery のコードはこのあたりです。
+ * https://github.com/jquery/jquery/blob/e53a91909061c7a7280a274990db179b94db81b6/src/event.js#L24
+ *
+ * そして on, trigger, off の名前に不満だったベン・アルマンさんは
+ * 次のようなラッパーを作っちゃったようです。
+ *
+ */
+
+(function ($) {
+    var o = $({});
+    $.subscribe = function () {
+        o.on.apply(o, arguments);
+    };
+    $.unsubscribe = function () {
+        o.off.apply(o, arguments);
+    };
+    $.publish = function () {
+        o.trigger.apply(o, arguments);
+    };
+}(jQuery));
+
+/**
+ * やはり「命名大事」ということを思い知らされますね。
+ *
+ * ところで、最近の jQuery のバージョンには、コールバックを複数持たせる
+ * コードを書くことが出来る新手法があるそうです。
+ * jQuery.Callbacks というやつですがこれも発行／講読システムです。
+ *
+ */
+
+var topics = {};
+
+jQuery.Topic = function (id) {
+    var callbacks,
+        topic = id && topics[id];
+    if (!topic) {
+        callbacks = jQuery.Callbacks();
+        topic = {
+            publish: callbacks.fire,
+            subscribe: callbacks.add,
+            unsubscribe: callbacks.remove
+        };
+        if (id) {
+            topics[id] = topic;
+        }
+    }
+    return topic;
+};
+
+/**
+ * こんなふうにして使います。
+ *
+ */
+
+fn1 = function (message) {
+    console.log("I'm fn1");
+    console.dir(message);
+};
+fn2 = function (message) {
+    console.log("I'm fn2");
+    console.dir(message);
+};
+
+// Subscribers
+$.Topic('mailArrived').subscribe(fn1);
+$.Topic('mailArrived').subscribe(fn2);
+$.Topic('mailSent').subscribe(fn1);
+
+// Publisher
+$.Topic('mailArrived').publish('Hello world!');
+$.Topic('mailSent').publish('woo! mail!');
+
+// 'mailArrived' 通知が発行されると fn1 と fn2 に 'Hello world!' がプッシュされる
+// 'mailSent' 通知が発行されると fn1 に 'woo! mail!' がプッシュされる
+
+
+/**
+ * 5-5. イテレータパターン
+ *
+ * ほい、コード見ましょう。
+ *
+ */
+$.each(['john', 'dave', 'rick', 'julian'], function (index, value) {
+    console.dir(index + ': ' + value);
+});
+
+$('li').each(function (index) {
+    console.dir(index + ': ' + $(this).text());
+});
+
+
+
+/**
  *
  */
 
 /**
  *
- *
  */
-
-
-

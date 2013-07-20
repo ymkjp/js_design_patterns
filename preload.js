@@ -8,4 +8,7 @@ var url,
     dataType,
     callback,
     type,
-    params;
+    params,
+    fn1,
+    fn2
+;
