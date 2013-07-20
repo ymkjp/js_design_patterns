@@ -44,7 +44,7 @@ $('input').addClass('active');
  *
  */
 
-console.log('item クラス');
+console.log('コンポジットパターン');
 console.dir(document.getElementsByClassName('item'));
 console.dir($('.item'));
 console.dir($('.item') instanceof jQuery.fn.init);
@@ -244,6 +244,7 @@ jQuery.Topic = function (id) {
  *
  */
 
+console.log("オブザーバパターン");
 fn1 = function (message) {
     console.log("I'm fn1");
     console.dir(message);
@@ -269,9 +270,10 @@ $.Topic('mailSent').publish('woo! mail!');
 /**
  * 5-5. イテレータパターン
  *
- * ほい、コード見ましょう。
+ * ほい、例のコードを見てみましょう。
  *
  */
+console.log('イテレータパターン');
 $.each(['john', 'dave', 'rick', 'julian'], function (index, value) {
     console.dir(index + ': ' + value);
 });
@@ -280,9 +282,16 @@ $('li').each(function (index) {
     console.dir(index + ': ' + $(this).text());
 });
 
-
-
 /**
+ * 以下に示すのは jQuery.fn.each() のコードです。
+ * https://github.com/jquery/jquery/blob/e53a91909061c7a7280a274990db179b94db81b6/src/core.js#L216
+ *
+ * そして jQuery.each() です。
+ * https://github.com/jquery/jquery/blob/e53a91909061c7a7280a274990db179b94db81b6/src/core.js#L541
+ *
+ * call と apply の雨嵐で近寄りがたいです。
+ * 他にも for ( ; i < length; i++ ) とか、奇妙な書き方がちらほら。
+ * まあここは本題とは異なるので一旦飛ばして余裕があれば時間を取りましょう。
  *
  */
 
