@@ -25,6 +25,7 @@ https://github.com/ymkjp/js_design_patterns/blob/master/app.js
 読んでいて「あぁ、 Chrome Extension に使えそう」と思いました。
 
 ここで紹介されいる内容を活かして Chrome Extension を書くと結構良い感じに書けます。
+
 なぜなら「js プラグインのお作法」として次のような共通点があるからです。
 
 * グローバル変数を汚染しない
@@ -32,17 +33,17 @@ https://github.com/ymkjp/js_design_patterns/blob/master/app.js
  * 参照を高速化できる
  * 効率よくミニファイできる
 * 複数のインスタンスが生成されることを防止するような機構を導入できる
-
+  
 
 こういった工夫をすることで、疎結合で開発も素早く動作も素早い Chrome Extension を書けると思います。
 
-もちろん、仕事でも、一から何かを作るような機会があるならばこういった書き方は
+もちろん、 Chrome Extension でなく仕事でも、一から何かを作るような機会があるならばこういった書き方は
 めちゃくちゃ参考になると思いますし、既存のコードでも汎用的な処理を切り出せそうだなと
 思えば jQuery Plugin にしてしまってもいいかもしれません。
 
 このままでは終わるとあまりに jQuery Plugin を軽視しているので一点だけコードを紹介します。
 
-```jQuery
+```javascript
 (function ($) {
   $.fn.myPluginName = function () {
     // ここにプラグインのロジックを書く
