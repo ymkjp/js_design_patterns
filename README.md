@@ -32,7 +32,7 @@ https://github.com/ymkjp/js_design_patterns/blob/master/app.js
 * window や document をローカル変数として扱うことで
  * 参照を高速化できる
  * 効率よくミニファイできる
-* 複数のインスタンスが生成されることを防止するような機構を導入できる
+* 複数のインスタンスが生成されることを防止するような機構を導入する
   
 
 こういった工夫をすることで、疎結合で開発も素早く動作も素早い Chrome Extension を書けると思います。
