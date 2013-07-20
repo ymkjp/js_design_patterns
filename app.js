@@ -295,6 +295,42 @@ $('li').each(function (index) {
  *
  */
 
+
+/**
+ * 5-6. 遅延初期化
+ *
+ * 今度の例もよく見るというか、毎回見るよねくらいの勢いのやつです。
+ *
+ */
+
+$(document).ready(function () {
+    // ajax 要求は DOM が準備完了するまで実行されない。
+    var jqxhr = $.ajax({
+        url: 'http://domain.com/api/',
+        data: 'display=latest&order=ascending'
+    })
+    .done(function (data) {
+        $('.status').html('content loaded');
+        console.dir('Data output: ' + data);
+    });
+});
+
+/**
+ * jQuery ではこうやって書かれています。
+ * https://github.com/jquery/jquery/blob/e53a91909061c7a7280a274990db179b94db81b6/speed/jquery-basis.js#L406
+ *
+ */
+
+
+
+
+
+
+
+
+
+
+
 /**
  *
  */
