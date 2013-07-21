@@ -306,7 +306,7 @@ $('li').each(function (index) {
 $(document).ready(function () {
     // ajax 要求は DOM が準備完了するまで実行されない。
     var jqxhr = $.ajax({
-        url: 'http://domain.com/api/',
+        url: 'http://example.com/api/',
         data: 'display=latest&order=ascending'
     })
     .done(function (data) {
