@@ -14,7 +14,8 @@ js_design_patterns
 
 5章のテキストは js のコードにしたので下記URLにあります。
 
-https://github.com/ymkjp/js_design_patterns/blob/master/app.js
+* https://github.com/ymkjp/js_design_patterns/blob/master/app.js
+* https://dl.dropboxusercontent.com/u/6998388/js_design_patterns/index.html
 
 
 
